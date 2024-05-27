@@ -1,0 +1,48 @@
+﻿<Window x:Class="Library.MainWindow"
+        xmlns:viewModels="clr-namespace:Library.ViewModels"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        Height="600" Width="1020"
+        AllowsTransparency="true">
+    <Window.DataContext>
+        <viewModels:MainViewModel/>
+    </Window.DataContext>
+    <Border Background="#454545" CornerRadius="25">
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Row="0" Grid.Column="0" Margin="20">
+                <Image.Source>
+                    <BitmapImage DecodePixelWidth="200" UriSource="/Pictures/book.png" />
+                </Image.Source>
+            </Image>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="Knižnica" FontSize="60" VerticalAlignment="Center" Foreground="#EDF4F2"></TextBlock>
+
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Home" Foreground="#EDF4F2" FontSize="18" Style="{StaticResource MenuRadioButton}" Command="{Binding ShowHomeCommand}"></RadioButton>
+                <RadioButton Content="Knižnice" Foreground="#EDF4F2" FontSize="18" Style="{StaticResource MenuRadioButton}" Command="{Binding ShowLibrariesCommand}"></RadioButton>
+                <RadioButton Content="Všetky knihy" Foreground="#EDF4F2" FontSize="18" Style="{StaticResource MenuRadioButton}" Command="{Binding ShowAllBooksCommand}"></RadioButton>
+                <RadioButton Content="Koniec" Foreground="#EDF4F2" FontSize="18" Style="{StaticResource MenuRadioButton}" Click="Close_App"></RadioButton>
+
+            </StackPanel>
+            <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding SelectedView}"/>
+        </Grid>
+    </Border>
+    
+</Window>

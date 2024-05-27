@@ -29,5 +29,20 @@ namespace Library
         {
             return Books.Where(book => book.DatabaseId == databaseId).ToList();
         }
+
+        public List<Book> GetAllBooks()
+        { 
+            return Books.OrderBy(book => book.Title).ToList();
+        }
+
+        public List<Book> GetBooksNameContains(string text)
+        {
+            return Books.Where(book => book.Title.Contains(text) || book.Author.Contains(text)).ToList();
+        }
+
+        public List<Book> GetBooksNameContainsWithId(string text, int databaseId)
+        {
+            return Books.Where(book => book.DatabaseId == databaseId && (book.Title.Contains(text) || book.Author.Contains(text))).ToList();
+        }
     }
 }

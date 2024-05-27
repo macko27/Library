@@ -3,10 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Library.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="400" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Foreground="#EDF4F2" FontSize="12" Text="Vyhľadávanie: " Padding="5" Margin="10 10 15 15" VerticalAlignment="Center"/>
+            <TextBox x:Name="SearchTextBox" Grid.Column="1" Margin="10" TextChanged="SearchTextBox_TextChanged" HorizontalAlignment="Stretch"/>
+        </Grid>
+
+        <ListBox x:Name="ListBoxBooks" Grid.Row="1" Height="400" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#454545" SelectionChanged="MyListViewBooksChanged" BorderThickness="0 0 0 0" Margin="10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                        <Image Width="50" Height="80" Source="{Binding Picture}" Margin="10 10 15 15"/>
+                        <TextBlock Text="{Binding Title}" Foreground="#EDF4F2" Margin="10 10 15 15" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Sector}" Foreground="#EDF4F2" Margin="10 10 15 15" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Author}" Foreground="#EDF4F2" Margin="10 10 15 15" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Year}" Foreground="#EDF4F2" Margin="10 10 15 15" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding ISBN}" Foreground="#EDF4F2" Margin="10 10 15 15" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button x:Name="EditBook" Content="Upraviť" FontSize="18" Click="Edit_Book" IsEnabled="False" Margin="5" Padding="5"/>
+            <Button x:Name="DeleteBook" Content="Vymazať" FontSize="18" Click="Delete_Book" IsEnabled="False" Margin="5" Padding="5"/>
+            <Button x:Name="AddBook" Content="Pridať knihu" FontSize="18" Click="Add_Book" IsEnabled="False" Margin="5" Padding="5"/>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

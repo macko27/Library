@@ -19,12 +19,12 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Image Grid.Row="0" Grid.Column="0" Margin="20">
@@ -41,6 +41,7 @@
                 <RadioButton Content="Koniec" Foreground="#EDF4F2" FontSize="18" Style="{StaticResource MenuRadioButton}" Click="Close_App"></RadioButton>
 
             </StackPanel>
+            
             <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding SelectedView}"/>
         </Grid>
     </Border>

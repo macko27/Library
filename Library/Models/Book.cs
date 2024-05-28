@@ -1,7 +1,4 @@
-﻿
-using System.Reflection.Metadata;
-
-namespace Library
+﻿namespace Library
 {
     public class Book
     {

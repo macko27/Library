@@ -1,5 +1,4 @@
-﻿
-namespace Library
+﻿namespace Library
 {
     public class Database
     {

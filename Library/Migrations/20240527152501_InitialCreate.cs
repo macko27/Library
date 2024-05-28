@@ -4,10 +4,11 @@
 
 namespace Library.Migrations
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Trieda vygenerovaná príkazom
+    /// </summary>
     public partial class InitialCreate : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(

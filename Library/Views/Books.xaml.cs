@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Library.Views
 {
@@ -80,9 +69,9 @@ namespace Library.Views
                             selectedBook.Year = year;
                             selectedBook.Sector = bookWindow.Sector.Text;
                             selectedBook.ISBN = bookWindow.ISBN.Text;
-                            if (bookWindow.SelectedImage != null)
+                            if (bookWindow.SelectedImage.Source is BitmapImage bitmapImage)
                             {
-                                selectedBook.Picture = ConvertImageToByteArray(bookWindow.SelectedImage.Source as BitmapImage);
+                                selectedBook.Picture = ConvertImageToByteArray(bitmapImage);
                             }
                             _databaseContext.SaveChanges();
                             LoadBooks(_currentDatabaseId);

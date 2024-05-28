@@ -16,14 +16,13 @@ namespace Library.Views
 
         private void OK_Button(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(Title.Text) || string.IsNullOrEmpty(Author.Text) || string.IsNullOrEmpty(Year.Text) || string.IsNullOrEmpty(Sector.Text))
+            if (string.IsNullOrEmpty(BookTitle.Text) || string.IsNullOrEmpty(Author.Text) || string.IsNullOrEmpty(Year.Text) || string.IsNullOrEmpty(Sector.Text))
             {
                 MessageBox.Show("Prosím vyplňte všetky povinné polia. (Označené - *)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            int year;
-            if (!int.TryParse(Year.Text, out year) || year < 0)
+            if (!int.TryParse(Year.Text, out int year) || year < 0)
             {
                 MessageBox.Show("Zle zadaný rok", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -39,8 +38,10 @@ namespace Library.Views
 
         private void SelectImage_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+            OpenFileDialog openFileDialog = new()
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp"
+            };
 
             if (openFileDialog.ShowDialog() == true)
             {

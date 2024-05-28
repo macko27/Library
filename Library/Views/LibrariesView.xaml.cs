@@ -27,8 +27,7 @@ namespace Library.Views
                 EditButton.IsEnabled = true;
                 DeleteButton.IsEnabled = true;
 
-                var selectedLibrary = ListBoxLibraries.SelectedItem as Database;
-                if (selectedLibrary != null)
+                if (ListBoxLibraries.SelectedItem is Database selectedLibrary)
                 {
                     Books.LoadBooks(selectedLibrary.Id);
                 }
@@ -45,16 +44,15 @@ namespace Library.Views
         {
             if (ListBoxLibraries.SelectedItem != null)
             {
-                LibraryWindow libraryWindow = new LibraryWindow();
-                var selectedLibrary = ListBoxLibraries.SelectedItem as Database;
-                if (selectedLibrary != null)
+                LibraryWindow libraryWindow = new();
+                if (ListBoxLibraries.SelectedItem is Database selectedLibrary)
                 {
-                    libraryWindow.Name.Text = selectedLibrary.Name;
+                    libraryWindow.LibraryName.Text = selectedLibrary.Name;
                     ListBoxLibraries.SelectedItem = null;
                     var result = libraryWindow.ShowDialog();
                     if (result == true)
                     {
-                        selectedLibrary.Name = libraryWindow.Name.Text;
+                        selectedLibrary.Name = libraryWindow.LibraryName.Text;
                         _databaseContext.SaveChanges();
                         LoadLibraries();
                     }
@@ -69,8 +67,7 @@ namespace Library.Views
             {
                 if (ListBoxLibraries.SelectedItem != null)
                 {
-                    var library = ListBoxLibraries.SelectedItem as Database;
-                    if (library != null)
+                    if (ListBoxLibraries.SelectedItem is Database library)
                     {
                         _databaseContext.Databases.Remove(library);
                         _databaseContext.SaveChanges();
@@ -82,13 +79,13 @@ namespace Library.Views
 
         private void Add_Library(object sender, RoutedEventArgs e)
         {
-            LibraryWindow libraryWindow = new LibraryWindow();
+            LibraryWindow libraryWindow = new();
             var result = libraryWindow.ShowDialog();
             if (result == true)
             {
                 var library = new Database
                 {
-                    Name = libraryWindow.Name.Text,
+                    Name = libraryWindow.LibraryName.Text,
                 };
                 _databaseContext.Databases.Add(library);
                 _databaseContext.SaveChanges();

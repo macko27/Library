@@ -45,11 +45,10 @@ namespace Library.Views
         {
             if (ListBoxBooks.SelectedItem != null)
             {
-                BookWindow bookWindow = new BookWindow();
-                var selectedBook = ListBoxBooks.SelectedItem as Book;
-                if (selectedBook != null)
+                BookWindow bookWindow = new();
+                if (ListBoxBooks.SelectedItem is Book selectedBook)
                 {
-                    bookWindow.Title.Text = selectedBook.Title;
+                    bookWindow.BookTitle.Text = selectedBook.Title;
                     bookWindow.Author.Text = selectedBook.Author;
                     bookWindow.Year.Text = selectedBook.Year.ToString();
                     bookWindow.Sector.Text = selectedBook.Sector;
@@ -64,7 +63,7 @@ namespace Library.Views
                     {
                         if (int.TryParse(bookWindow.Year.Text, out int year))
                         {
-                            selectedBook.Title = bookWindow.Title.Text;
+                            selectedBook.Title = bookWindow.BookTitle.Text;
                             selectedBook.Author = bookWindow.Author.Text;
                             selectedBook.Year = year;
                             selectedBook.Sector = bookWindow.Sector.Text;
@@ -88,8 +87,7 @@ namespace Library.Views
             {
                 if (ListBoxBooks.SelectedItem != null)
                 {
-                    var book = ListBoxBooks.SelectedItem as Book;
-                    if (book != null)
+                    if (ListBoxBooks.SelectedItem is Book book)
                     {
                         _databaseContext.Books.Remove(book);
                         _databaseContext.SaveChanges();
@@ -101,7 +99,7 @@ namespace Library.Views
 
         private void Add_Book(object sender, RoutedEventArgs e)
         {
-            BookWindow bookWindow = new BookWindow();
+            BookWindow bookWindow = new();
             var result = bookWindow.ShowDialog();
             if (result == true)
             {
@@ -109,16 +107,16 @@ namespace Library.Views
                 {
                     var book = new Book
                     {
-                        Title = bookWindow.Title.Text,
+                        Title = bookWindow.BookTitle.Text,
                         Author = bookWindow.Author.Text,
                         Sector = bookWindow.Sector.Text,
                         Year = year,
                         ISBN = bookWindow.ISBN.Text,
                         DatabaseId = _currentDatabaseId
                     };
-                    if (bookWindow.SelectedImage != null)
+                    if (bookWindow.SelectedImage.Source is BitmapImage bitmapImage)
                     {
-                        book.Picture = ConvertImageToByteArray(bookWindow.SelectedImage.Source as BitmapImage);
+                        book.Picture = ConvertImageToByteArray(bitmapImage);
                     }
                     _databaseContext.Books.Add(book);
                     _databaseContext.SaveChanges();
@@ -127,36 +125,32 @@ namespace Library.Views
             }
         }
 
-        private byte[]? ConvertImageToByteArray(BitmapImage image)
+        private static byte[]? ConvertImageToByteArray(BitmapImage image)
         {
-            byte[] imageBytes = null;
+            byte[] imageBytes = [];
             if (image != null)
             {
-                using (MemoryStream memoryStream = new MemoryStream())
-                {
-                    BitmapEncoder encoder = new PngBitmapEncoder();
-                    encoder.Frames.Add(BitmapFrame.Create(image));
-                    encoder.Save(memoryStream);
-                    imageBytes = memoryStream.ToArray();
-                }
+                using MemoryStream memoryStream = new();
+                BitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(image));
+                encoder.Save(memoryStream);
+                imageBytes = memoryStream.ToArray();
             }
             return imageBytes;
         }
 
-        private BitmapImage? LoadImageFromByteArray(byte[] imageData)
+        private static BitmapImage? LoadImageFromByteArray(byte[] imageData)
         {
             if (imageData == null || imageData.Length == 0)
                 return null;
 
-            using (MemoryStream memoryStream = new MemoryStream(imageData))
-            {
-                BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.StreamSource = memoryStream;
-                bitmapImage.EndInit();
-                return bitmapImage;
-            }
+            using MemoryStream memoryStream = new(imageData);
+            BitmapImage bitmapImage = new();
+            bitmapImage.BeginInit();
+            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+            bitmapImage.StreamSource = memoryStream;
+            bitmapImage.EndInit();
+            return bitmapImage;
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)

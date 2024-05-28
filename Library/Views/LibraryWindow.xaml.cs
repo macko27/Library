@@ -14,7 +14,7 @@ namespace Library.Views
 
         private void OK_Button(object sender, RoutedEventArgs e)
         {
-            if (Name.Text != "")
+            if (LibraryName.Text != "")
             {
                 DialogResult = true;
                 this.Close();

@@ -21,27 +21,27 @@ namespace Library
 
         public List<Database> GetAllDatabases()
         {
-            return Databases.ToList();
+            return [.. Databases];
         }
 
         public List<Book> GetBooks(int databaseId)
         {
-            return Books.Where(book => book.DatabaseId == databaseId).ToList();
+            return [.. Books.Where(book => book.DatabaseId == databaseId)];
         }
 
         public List<Book> GetAllBooks()
         { 
-            return Books.OrderBy(book => book.Title).ToList();
+            return [.. Books.OrderBy(book => book.Title)];
         }
 
         public List<Book> GetBooksNameContains(string text)
         {
-            return Books.Where(book => book.Title.Contains(text) || book.Author.Contains(text)).ToList();
+            return [.. Books.Where(book => book.Title.Contains(text) || book.Author.Contains(text))];
         }
 
         public List<Book> GetBooksNameContainsWithId(string text, int databaseId)
         {
-            return Books.Where(book => book.DatabaseId == databaseId && (book.Title.Contains(text) || book.Author.Contains(text))).ToList();
+            return [.. Books.Where(book => book.DatabaseId == databaseId && (book.Title.Contains(text) || book.Author.Contains(text)))];
         }
     }
 }

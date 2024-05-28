@@ -7,15 +7,18 @@ namespace Library.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private object _selectedView;
+        private object? _selectedView;
 
-        public object SelectedView
+        public object? SelectedView
         {
             get => _selectedView;
             set
             {
-                _selectedView = value;
-                OnPropertyChanged();
+                if (_selectedView != value)
+                {
+                    _selectedView = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -36,8 +39,9 @@ namespace Library.ViewModels
         private void ShowLibraries() => SelectedView = new LibrariesView();
         private void ShowAllBooks() => SelectedView = new AllBooksView();
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

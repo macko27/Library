@@ -24,7 +24,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="*Názov:" FontSize="12" Grid.Row="0" Grid.Column="0" Padding="5" Margin="5 10 10 10" VerticalAlignment="Center"></TextBlock>
-            <TextBox Name="Title" Grid.Row="0" Grid.Column="1" FontSize="12" Padding="5" Margin="5"></TextBox>
+            <TextBox Name="BookTitle" Grid.Row="0" Grid.Column="1" FontSize="12" Padding="5" Margin="5"></TextBox>
 
             <TextBlock Text="*Autor:" FontSize="12" Grid.Row="1" Grid.Column="0" Padding="5" Margin="5 10 10 10" VerticalAlignment="Center"></TextBlock>
             <TextBox Name="Author" Grid.Row="1" Grid.Column="1" FontSize="12" Padding="5" Margin="5"></TextBox>

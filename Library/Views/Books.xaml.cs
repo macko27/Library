@@ -138,7 +138,7 @@ namespace Library.Views
             }
         }
 
-        private byte[] ConvertImageToByteArray(BitmapImage image)
+        private byte[]? ConvertImageToByteArray(BitmapImage image)
         {
             byte[] imageBytes = null;
             if (image != null)
@@ -154,7 +154,7 @@ namespace Library.Views
             return imageBytes;
         }
 
-        private BitmapImage LoadImageFromByteArray(byte[] imageData)
+        private BitmapImage? LoadImageFromByteArray(byte[] imageData)
         {
             if (imageData == null || imageData.Length == 0)
                 return null;

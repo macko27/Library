@@ -27,11 +27,21 @@ namespace Library.Views
 
         private void OK_Button(object sender, RoutedEventArgs e)
         {
-            if (Title.Text != "" && Author.Text != "" && Year.Text != "" && Sector.Text != "")
+            if (string.IsNullOrEmpty(Title.Text) || string.IsNullOrEmpty(Author.Text) || string.IsNullOrEmpty(Year.Text) || string.IsNullOrEmpty(Sector.Text))
             {
-                DialogResult = true;
-                this.Close();
+                MessageBox.Show("Prosím vyplňte všetky povinné polia. (Označené - *)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
+
+            int year;
+            if (!int.TryParse(Year.Text, out year) || year < 0)
+            {
+                MessageBox.Show("Zle zadaný rok", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            DialogResult = true;
+            this.Close();
         }
         private void Cancel_Button(object sender, RoutedEventArgs e)
         {

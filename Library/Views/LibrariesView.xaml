@@ -19,24 +19,29 @@
 
         <Grid Margin="10">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-        
-        <ListBox Grid.Column="0" Grid.Row="0" Height="400" Name="ListBoxLibraries" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#454545" BorderThickness="0 0 1 0" SelectionChanged="MyListViewChanged" Margin="10">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                        <TextBlock Text="{Binding Name}" Foreground="#EDF4F2" Margin="10 10 15 15"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
 
-        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"  Margin="10">
-            <Button x:Name="EditButton" Content="Upraviť" FontSize="18" Click="Edit_Library" IsEnabled="False" Margin="5" Padding="5"/>
-            <Button x:Name="DeleteButton" Content="Vymazať" FontSize="18" Click="Delete_Library" IsEnabled="False" Margin="5" Padding="5"/>
-            <Button x:Name="AddButton" Content="Pridať knižnicu" FontSize="18" Click="Add_Library" Margin="5" Padding="5"/>
+            <TextBlock Grid.Column="0" Foreground="#EDF4F2" FontSize="12" Text="Dostupné knižnice: " Padding="5" Margin="10 10 15 15" VerticalAlignment="Center"/>
+
+            <ScrollViewer Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Margin="10">
+                <ListBox Height="400" Name="ListBoxLibraries" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#454545" BorderThickness="0" SelectionChanged="MyListViewChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                <TextBlock Text="{Binding Name}" Foreground="#EDF4F2" Margin="10 10 15 15"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+
+            <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center"  Margin="10">
+                <Button x:Name="EditButton" Content="Upraviť" Click="Edit_Library" IsEnabled="False" Style="{StaticResource Button}"/>
+                <Button x:Name="DeleteButton" Content="Vymazať" Click="Delete_Library" IsEnabled="False" Style="{StaticResource Button}"/>
+                <Button x:Name="AddButton" Content="Pridať knižnicu" Click="Add_Library" Style="{StaticResource Button}"/>
         </StackPanel>
         </Grid>
     

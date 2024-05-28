@@ -14,8 +14,8 @@
     <Window.DataContext>
         <viewModels:MainViewModel/>
     </Window.DataContext>
-    <Border Background="#454545" CornerRadius="25">
-        
+    <Border Background="#303030" CornerRadius="25">
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
@@ -27,12 +27,12 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Row="0" Grid.Column="0" Margin="20">
-                <Image.Source>
-                    <BitmapImage DecodePixelWidth="200" UriSource="/Pictures/book.png" />
-                </Image.Source>
-            </Image>
-            <TextBlock Grid.Row="0" Grid.Column="1" Text="Knižnica" FontSize="60" VerticalAlignment="Center" Foreground="#EDF4F2"></TextBlock>
+            <Border CornerRadius="8,8,8,8" Grid.Row="0" Grid.Column="0" Margin="30 20 30 20">
+                <Border.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="/Pictures/book2.jpg"/>
+                </Border.Background>
+            </Border>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="Knižnica" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#EDF4F2"></TextBlock>
 
             <StackPanel Grid.Row="1">
                 <RadioButton Content="Home" Foreground="#EDF4F2" FontSize="18" Style="{StaticResource MenuRadioButton}" Command="{Binding ShowHomeCommand}"></RadioButton>
@@ -41,9 +41,9 @@
                 <RadioButton Content="Koniec" Foreground="#EDF4F2" FontSize="18" Style="{StaticResource MenuRadioButton}" Click="Close_App"></RadioButton>
 
             </StackPanel>
-            
+
             <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding SelectedView}"/>
         </Grid>
     </Border>
-    
+
 </Window>

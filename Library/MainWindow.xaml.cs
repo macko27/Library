@@ -16,27 +16,9 @@ namespace Library
     /// </summary>
     public partial class MainWindow : Window
     {
-        public DatabaseContext DatabaseContext { get; } = new();
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void Add_Book(object sender, RoutedEventArgs e)
-        {
-            var book = new Book
-            {
-                Title = "Example Book",
-                Author = "John Doe",
-                Year = 2022,
-                // Pridajte ID existujúcej databázy, kam chcete knihu pridať
-                DatabaseId = DatabaseContext.Databases.First().Id
-            };
-            DatabaseContext.Books.Add(book);
-            DatabaseContext.SaveChanges();
-            var books = DatabaseContext.Books.OrderBy(b => b.Id).ToList();
-            //listView.ItemsSource = books;
-            Console.WriteLine("ddd");
         }
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)

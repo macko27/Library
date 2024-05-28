@@ -5,14 +5,15 @@
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <Border x:Name="border" Background="Transparent" Padding="5" CornerRadius="10">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="False">
                             <Setter TargetName="border" Property="Background" Value="Transparent"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#303030"/>
+                            <Setter TargetName="border" Property="Background" Value="#A1CAF1"/>
+                            <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="Black"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -20,5 +21,6 @@
         </Setter>
         <Setter Property="Foreground" Value="#EDF4F2"/>
         <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Margin" Value="10"/>
     </Style>
 </ResourceDictionary>
